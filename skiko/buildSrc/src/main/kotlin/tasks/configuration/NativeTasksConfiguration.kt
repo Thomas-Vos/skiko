@@ -261,8 +261,8 @@ fun SkikoProjectContext.configureNativeTarget(os: OS, arch: Arch, target: Kotlin
                 "$skiaBinDir/libskia.a"
             )
             if (arch == Arch.Arm64 && hostArch != Arch.Arm64) {
-                options.add(0, "-L" + project.layout.buildDirectory.dir("multistrap-arm64/usr/lib").get())
-                options.add(1, "-L" + project.layout.buildDirectory.dir("multistrap-arm64/usr/lib/aarch64-linux-gnu").get())
+                options.add(0, "-L$buildDir/multistrap-arm64/usr/lib")
+                options.add(1, "-L$buildDir/multistrap-arm64/usr/lib/aarch64-linux-gnu")
             }
             mutableListOfLinkerOptions(options)
         }
