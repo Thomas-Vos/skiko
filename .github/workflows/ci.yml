@@ -168,10 +168,10 @@ jobs:
           sudo Xvfb :0 -screen 0 1280x720x24 &
 
       - shell: bash
-        name: 'Compile and run Linux arm64 tests'
+        name: 'Compile Linux arm64 tests'
         run: |
           export DISPLAY=:0
-          ./gradlew --no-daemon --stacktrace --info -Pskiko.native.enabled=true -Pkotlin.native.cacheKind.linuxArm64=none -Pskiko.test.onci=true :skiko:linuxArm64Test
+          ./gradlew --no-daemon --stacktrace --info -Pskiko.native.enabled=true -Pkotlin.native.cacheKind.linuxArm64=none -Pskiko.test.onci=true :skiko:linuxArm64TestBinaries
 
       - shell: bash
         name: 'Compile and run Linux x64 tests'
