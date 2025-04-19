@@ -192,7 +192,7 @@ fun skiaStaticLibraries(skiaDir: String, targetString: String, buildType: SkiaBu
         "libskresources.a",
         "libskparagraph.a",
         "libskia.a",
-        "libicu.a",
+//        "libicu.a",
         "libjsonreader.a",
         "libskottie.a",
         "libsvg.a",
@@ -200,7 +200,8 @@ fun skiaStaticLibraries(skiaDir: String, targetString: String, buildType: SkiaBu
         "libwebp_sse41.a",
         "libsksg.a",
         "libskunicode_core.a",
-        "libskunicode_icu.a",
+        "libskunicode_client_icu.a",
+        "libskunicode_libgrapheme.a",
         "libwebp.a",
         "libdng_sdk.a",
         "libpiex.a",
@@ -262,7 +263,8 @@ fun SkikoProjectContext.configureNativeTarget(os: OS, arch: Arch, target: Kotlin
                 "$skiaBinDir/libsksg.a",
                 "$skiaBinDir/libskshaper.a",
                 "$skiaBinDir/libskunicode_core.a",
-                "$skiaBinDir/libskunicode_icu.a",
+                "$skiaBinDir/libskunicode_client_icu.a",
+                "$skiaBinDir/libskunicode_libgrapheme.a",
                 "$skiaBinDir/libskia.a"
             )
             if (arch == Arch.Arm64 && hostArch != Arch.Arm64) {
