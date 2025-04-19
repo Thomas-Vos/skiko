@@ -137,6 +137,7 @@ fun SkikoProjectContext.compileNativeBridgesTask(
             OS.Linux -> {
                 flags.set(listOf(
                     *buildType.clangFlags,
+                    "-fPIC",
                     "-fno-rtti",
                     "-fno-exceptions",
                     "-fvisibility=hidden",
