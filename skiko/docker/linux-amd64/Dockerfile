@@ -8,12 +8,8 @@ RUN apt-get update -y && \
     apt-get install binutils-2.26 && \
     apt-get install build-essential software-properties-common -y && \
     apt-get update && \
-    apt-get install gcc-9 g++-9 -y && \
-    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-9 && \
-    update-alternatives --config gcc && \
-    apt-get install gcc-9-aarch64-linux-gnu g++-9-aarch64-linux-gnu -y && \
-    update-alternatives --install /usr/bin/aarch64-linux-gnu-gcc aarch64-linux-gnu-gcc /usr/bin/aarch64-linux-gnu-gcc-9 60 --slave /usr/bin/aarch64-linux-gnu-g++ aarch64-linux-gnu-g++ /usr/bin/aarch64-linux-gnu-g++-9 && \
-    update-alternatives --config aarch64-linux-gnu-gcc
+    apt-get install gcc g++ -y && \
+    apt-get install gcc-aarch64-linux-gnu g++-aarch64-linux-gnu -y && \
 ENV PATH=/usr/lib/binutils-2.26/bin:$PATH
 
 # Install libs & tools
