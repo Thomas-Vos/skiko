@@ -41,18 +41,19 @@ fun SkikoProjectContext.declareSkiaTasks() {
 
             val artifactId = "Skia-${skiaReleaseTag}-${config}-$buildType-${arch}"
 
-            val downloadSkiaTask = project.tasks.register<Download>("downloadSkia$buildType$taskNameSuffix") {
-                group = "Skia Binaries"
-
-                val skiaUrl = "$skiaBaseUrl/$artifactId.zip"
-                description = "downloads $skiaUrl"
-
-                onlyIfModified(true)
-                src(skiaUrl)
-                dest(skiko.dependenciesDir.resolve(
-                    "skia/$skiaReleaseTag/Skia-$skiaReleaseTag-$config-$buildType-${arch}.zip")
-                )
-            }
+//            val downloadSkiaTask = project.tasks.register<Download>("downloadSkia$buildType$taskNameSuffix") {
+//                group = "Skia Binaries"
+//
+//                val skiaUrl = "$skiaBaseUrl/$artifactId.zip"
+//                description = "downloads $skiaUrl"
+//
+//                onlyIfModified(true)
+//                src(skiaUrl)
+//                dest(skiko.dependenciesDir.resolve(
+//                    "skia/$skiaReleaseTag/Skia-$skiaReleaseTag-$config-$buildType-${arch}.zip")
+//                )
+//            }
+            val downloadSkiaTask = project.rootProject.file("Skia-m138-80d088a-1-linux-Release-arm64.zip")
 
             project.tasks.register<Copy>("unzipSkia$buildType$taskNameSuffix") {
                 group = "Skia Binaries"
@@ -60,8 +61,8 @@ fun SkikoProjectContext.declareSkiaTasks() {
                 val outputDir = skiko.dependenciesDir.resolve("skia/$skiaReleaseTag/$artifactId")
                 description = "unzips to $outputDir"
 
-                dependsOn(downloadSkiaTask)
-                from(project.zipTree(downloadSkiaTask.get().dest))
+//                dependsOn(downloadSkiaTask)
+                from(project.zipTree(downloadSkiaTask))
 
                 into(outputDir)
             }
