@@ -19,6 +19,8 @@ jobs:
           sudo apt install zip unzip git curl wget xvfb -y
           sudo apt install fontconfig libfontconfig1-dev libglu1-mesa-dev libegl1-mesa-dev libxrandr-dev libdbus-1-dev -y
           sudo apt install openjdk-21-jdk -y
+          export LIBGL_ALWAYS_SOFTWARE=1
+          echo "export LIBGL_ALWAYS_SOFTWARE=1" >> $GITHUB_ENV
 
       - shell: bash
         name: 'Start X Server'
