@@ -15,6 +15,14 @@ jobs:
         name: 'Check out code'
 
       - shell: bash
+        run: |
+          sudo apt update
+          sudo apt install binutils build-essential software-properties-common -y
+          sudo apt install zip unzip git python curl wget xvfb -y
+          sudo apt install fontconfig libfontconfig1-dev libglu1-mesa-dev libegl1-mesa-dev libxrandr-dev libdbus-1-dev -y
+          sudo apt install openjdk-21-jdk -y
+
+      - shell: bash
         name: 'Start X Server'
         run: |
           Xvfb :1 -screen 0 1920x1080x24 -extension RANDR +extension GLX &
@@ -24,8 +32,6 @@ jobs:
         name: 'Run Linux (arm64) Tests'
         working-directory: skiko
         run: |
-          sudo apt update
-          sudo apt install fontconfig libfontconfig1-dev libglu1-mesa-dev libegl1-mesa-dev libxrandr-dev libdbus-1-dev -y
           chmod +x ./test.kexe
           ./test.kexe
 
