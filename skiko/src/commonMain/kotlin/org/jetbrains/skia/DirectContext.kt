@@ -7,6 +7,13 @@ import org.jetbrains.skiko.loadOpenGLLibrary
 
 class DirectContext internal constructor(ptr: NativePointer) : RefCnt(ptr) {
     companion object {
+        fun makeEGL(): DirectContext {
+            Stats.onNativeCall()
+            val ptr = _nMakeEGL()
+            if (ptr == NullPointer) throw RenderException("Can't create EGL DirectContext")
+            return DirectContext(ptr)
+        }
+
         fun makeGL(): DirectContext {
             Stats.onNativeCall()
             loadOpenGLLibrary()
@@ -166,6 +173,9 @@ private external fun DirectContext_nGetResourceCacheLimit(ptr: NativePointer): L
 
 @ExternalSymbolName("org_jetbrains_skia_DirectContext__1nSetResourceCacheLimit")
 private external fun DirectContext_nSetResourceCacheLimit(ptr: NativePointer, maxResourceBytes: Long)
+
+@ExternalSymbolName("org_jetbrains_skia_DirectContext__1nMakeEGL")
+private external fun _nMakeEGL(): NativePointer
 
 @ExternalSymbolName("org_jetbrains_skia_DirectContext__1nMakeGL")
 private external fun _nMakeGL(): NativePointer

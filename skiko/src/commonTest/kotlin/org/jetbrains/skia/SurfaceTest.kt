@@ -2,6 +2,8 @@ package org.jetbrains.skia
 
 import org.jetbrains.skia.impl.interopScope
 import org.jetbrains.skia.impl.use
+import org.jetbrains.skiko.Arch
+import org.jetbrains.skiko.hostArch
 import org.jetbrains.skiko.tests.TestGlContext
 import org.jetbrains.skiko.tests.allocateBytesForPixels
 import org.jetbrains.skiko.tests.runTest
@@ -108,7 +110,12 @@ class SurfaceTest {
         if (!TestGlContext.isAvailable()) return
 
         val pixels = TestGlContext.run {
-            DirectContext.makeGL().useContext { ctx ->
+            val ctx = when (hostArch) {
+                Arch.X64 -> DirectContext.makeGL()
+                Arch.Arm64 -> DirectContext.makeEGL()
+                else -> error("Unsupported arch: $hostArch")
+            }
+            ctx.useContext {
                 val imageInfo = ImageInfo.makeN32Premul(16, 16)
                 val surface = Surface.makeRenderTarget(ctx, budgeted = false, imageInfo)
 
