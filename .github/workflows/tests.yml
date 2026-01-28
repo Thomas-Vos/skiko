@@ -24,6 +24,8 @@ jobs:
         name: 'Run Linux (arm64) Tests'
         working-directory: skiko
         run: |
+          sudo apt update
+          sudo apt install fontconfig libfontconfig1-dev libglu1-mesa-dev libegl1-mesa-dev libxrandr-dev libdbus-1-dev -y
           chmod +x ./test.kexe
           ./test.kexe
 
